@@ -48,6 +48,7 @@ class MeetUpController {
       description: Yup.string().required(),
       localization: Yup.string().required(),
       date: Yup.date().required(),
+      file_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -86,7 +87,6 @@ class MeetUpController {
 
   async update(req, res) {
     const schema = Yup.object().shape({
-      // id: Yup.number().required(),
       title: Yup.string(),
       description: Yup.string(),
       localization: Yup.string(),
@@ -106,7 +106,7 @@ class MeetUpController {
         .json("You are not allowed to edit another user's meetup");
     }
 
-    const hourStart = startOfHour(parseISO(meetup.date));
+    const hourStart = startOfHour(meetup.date);
     if (isBefore(hourStart, new Date())) {
       return res
         .status(400)
