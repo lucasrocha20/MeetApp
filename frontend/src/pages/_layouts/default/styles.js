@@ -4,6 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   background: #22202c;
+  height: 100%;
 `;
 
 export const Content = styled.div`
