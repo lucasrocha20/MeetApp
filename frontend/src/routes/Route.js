@@ -7,6 +7,8 @@ import DefaultLayout from '../pages/_layouts/default';
 
 import { store } from '~/store';
 
+import Header from '~/components/Header';
+
 export default function RouteWrapper({
   component: Component,
   isPrivate,
@@ -28,9 +30,12 @@ export default function RouteWrapper({
     <Route
       {...rest}
       render={props => (
-        <Layout>
-          <Component {...props} />
-        </Layout>
+        <>
+          {signed && <Header />}
+          <Layout>
+            <Component {...props} />
+          </Layout>
+        </>
       )}
     />
   );

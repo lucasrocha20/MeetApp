@@ -21,10 +21,16 @@ export const Content = styled.div`
     input {
       height: 50px;
       border-radius: 4px;
-      opacity: 0.2;
+      background: rgba(0, 0, 0, 0.2);
+      color: #fff;
+      border: none;
       font-size: 18px;
       padding: 0 20px;
       margin-bottom: 10px;
+
+      ::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
     }
 
     button {

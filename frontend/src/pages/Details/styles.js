@@ -73,7 +73,7 @@ export const Container = styled.div`
   footer {
     display: flex;
     justify-content: flex-start;
-    color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
     font-size: 16px;
 
     span {

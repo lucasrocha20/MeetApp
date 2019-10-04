@@ -3,7 +3,8 @@ import styled from 'styled-components';
 export const Container = styled.div`
   max-width: 900px;
   height: 100%;
-  /* margin: 50px auto; */
+  margin: auto;
+  padding-top: 50px;
 
   form {
     display: flex;
@@ -21,7 +22,7 @@ export const Container = styled.div`
     }
 
     hr {
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       margin: 20px 0 20px;
       height: 1px;
       background: (255, 255, 255, 0.2);
