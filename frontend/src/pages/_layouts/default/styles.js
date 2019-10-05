@@ -3,12 +3,11 @@ import styled from 'styled-components';
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  background: #22202c;
-  /* height: 100%; */
+  background: linear-gradient(-180deg, #22202c, #402845);
+  height: 100%;
 `;
 
 export const Content = styled.div`
-  height: 100%;
   width: 100%;
   max-width: 1200px;
   text-align: center;
