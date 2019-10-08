@@ -31,6 +31,9 @@ export default function SignUp({ navigation }) {
 
   function handleSubmit() {
     dispatch(signUpRequest(name, email, password));
+    if (name.length !== 0 || email.length !== 0 || password.length !== 0) {
+      navigation.navigate('SignIn');
+    }
   }
 
   return (

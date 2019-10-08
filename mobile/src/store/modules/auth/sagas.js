@@ -1,6 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects';
 import { Alert } from 'react-native';
-// import history from '~/services/history';
 
 import api from '~/services/api';
 
@@ -39,8 +38,6 @@ export function* signUp({ payload }) {
     });
 
     Alert.alert('Sucesso', 'Usuário cadastrado com sucesso!');
-
-    // history.push('/');
   } catch (err) {
     Alert.alert('Erro', 'Impossível cadastrar, verifique seus dados!');
 
