@@ -28,9 +28,11 @@ import api from '~/services/api';
 
 function Dashboard({ isFocused }) {
   const [meetups, setMeetups] = useState([]);
+  const [subscriptions, setSubscriptions] = useState([]);
 
   const [date, setDate] = useState(new Date());
   const [page, setPage] = useState(1);
+
   async function loadlMeetups() {
     const queryDate = format(date, "yyyy'-'MM'-'dd", { locale: pt });
 
@@ -55,6 +57,7 @@ function Dashboard({ isFocused }) {
 
     setMeetups([...meetups, ...data]);
     setPage(page + 1);
+
     console.tron.log(data);
   }
 
@@ -63,8 +66,19 @@ function Dashboard({ isFocused }) {
     [date]
   );
 
+  async function loadSubscriptions() {
+    const response = await api.get('subscription');
+
+    const subscription_id = response.data.map(item => {
+      return item.meetup_id;
+    });
+
+    await setSubscriptions(subscription_id);
+  }
+
   useEffect(() => {
     loadlMeetups();
+    loadSubscriptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, isFocused]);
 
@@ -87,6 +101,7 @@ function Dashboard({ isFocused }) {
       if (!past) {
         await api.post(`subscription/${id}`);
         Alert.alert('Sucesso!', 'Inscrição realizada com sucesso!');
+        loadSubscriptions();
       }
     } catch (err) {
       Alert.alert('Erro!', 'Erro na inscrição!');
@@ -96,7 +111,7 @@ function Dashboard({ isFocused }) {
   return (
     <Background>
       <Header />
-
+      {console.tron.log(subscriptions, 'subs')}
       <Container>
         <DateHeader>
           <TouchableOpacity onPress={handleSubDay}>
@@ -140,12 +155,23 @@ function Dashboard({ isFocused }) {
                 </Span>
               </Info>
 
-              <ButtonContent
-                past={item.past}
-                onPress={() => handleInscription(item.id, item.past)}
-              >
-                Realizar inscrição
-              </ButtonContent>
+              {console.tron.log(subscriptions.indexOf(item.id))}
+              {subscriptions.indexOf(item.id) >= 0 ? (
+                <ButtonContent
+                  subscription
+                  past={item.past}
+                  onPress={() => handleInscription(item.id, item.past)}
+                >
+                  Inscrito
+                </ButtonContent>
+              ) : (
+                <ButtonContent
+                  past={item.past}
+                  onPress={() => handleInscription(item.id, item.past)}
+                >
+                  Realizar inscrição
+                </ButtonContent>
+              )}
             </Content>
           )}
         />

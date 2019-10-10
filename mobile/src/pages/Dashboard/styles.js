@@ -67,5 +67,5 @@ export const ButtonContent = styled(Button)`
   height: 40px;
   margin-bottom: 20px;
 
-  opacity: ${props => (props.past ? 0.6 : 1)};
+  opacity: ${props => (props.past || props.subscription ? 0.6 : 1)};
 `;

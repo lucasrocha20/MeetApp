@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert, Modal } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,6 +18,9 @@ import {
   Title,
   Span,
   ButtonContent,
+  ContainerModal,
+  ContentModal,
+  TextModal,
 } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
@@ -110,6 +113,27 @@ function Inscription({ isFocused }) {
           )}
         />
       </Container>
+
+      <Modal
+        animationType="slide"
+        transparent
+        visible
+        // onRequestClose={() => {
+        //   Alert.alert('Modal has been closed.');
+        // }}
+      >
+        <ContainerModal>
+          <ContentModal>
+            <TextModal>Deseja cancelar a inscrição ?</TextModal>
+          </ContentModal>
+        </ContainerModal>
+        {/* <Text>Hello World!</Text> */}
+
+        {/* <TouchableHighlight onPress={() => {}}>
+              <Text>Hide Modal</Text>
+            </TouchableHighlight> */}
+        {/* </ContentModal> */}
+      </Modal>
     </Background>
   );
 }

@@ -45,3 +45,20 @@ export const ButtonContent = styled(Button)`
   height: 40px;
   margin-bottom: 20px;
 `;
+
+export const ContainerModal = styled.View`
+  flex: 1;
+  background: #000;
+  opacity: 0.5;
+`;
+
+export const ContentModal = styled.View`
+  height: 25%;
+  width: 80%;
+  border-radius: 4px;
+  background: #fff;
+`;
+
+export const TextModal = styled.Text`
+  font-size: 16px;
+`;
