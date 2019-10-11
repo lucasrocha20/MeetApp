@@ -46,19 +46,35 @@ export const ButtonContent = styled(Button)`
   margin-bottom: 20px;
 `;
 
-export const ContainerModal = styled.View`
-  flex: 1;
-  background: #000;
-  opacity: 0.5;
-`;
-
 export const ContentModal = styled.View`
-  height: 25%;
-  width: 80%;
+  align-self: center;
+  align-items: center;
+  padding: 5px;
+  margin: auto 0;
+  height: 16%;
+  width: 70%;
   border-radius: 4px;
   background: #fff;
 `;
 
 export const TextModal = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
+  font-weight: bold;
+`;
+
+export const ContentButtonModal = styled.View`
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+`;
+
+export const ButtonModal = styled.Button.attrs(props => ({
+  color: props.cancel ? '#f94d6a' : '#6FCF97',
+  style: {
+    width: 200px,
+  },
+}))`
+  margin-top: 30px;
+  width: 45%;
+  align-items: center;
 `;

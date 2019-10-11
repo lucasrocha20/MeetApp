@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Modal } from 'react-native';
+import { Alert, Text } from 'react-native';
+import Modal from 'react-native-modal';
 import { withNavigationFocus } from 'react-navigation';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -18,9 +19,10 @@ import {
   Title,
   Span,
   ButtonContent,
-  ContainerModal,
   ContentModal,
   TextModal,
+  ContentButtonModal,
+  ButtonModal,
 } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
@@ -29,6 +31,7 @@ import api from '~/services/api';
 
 function Inscription({ isFocused }) {
   const [subscriptions, setSubscriptions] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function loadSubscriptions() {
     try {
@@ -75,7 +78,6 @@ function Inscription({ isFocused }) {
   return (
     <Background>
       <Header />
-
       <Container>
         <ListMeetup
           data={subscriptions}
@@ -106,33 +108,28 @@ function Inscription({ isFocused }) {
                 </Span>
               </Info>
 
-              <ButtonContent onPress={() => cancelSubscription(item.id)}>
+              {/* cancelSubscription(item.id) */}
+              <ButtonContent onPress={() => setModalVisible(true)}>
                 Cancelar Inscrição
               </ButtonContent>
             </Content>
           )}
         />
       </Container>
+      {console.tron.log(modalVisible)}
 
-      <Modal
-        animationType="slide"
-        transparent
-        visible
-        // onRequestClose={() => {
-        //   Alert.alert('Modal has been closed.');
-        // }}
-      >
-        <ContainerModal>
-          <ContentModal>
-            <TextModal>Deseja cancelar a inscrição ?</TextModal>
-          </ContentModal>
-        </ContainerModal>
-        {/* <Text>Hello World!</Text> */}
-
-        {/* <TouchableHighlight onPress={() => {}}>
-              <Text>Hide Modal</Text>
-            </TouchableHighlight> */}
-        {/* </ContentModal> */}
+      <Modal isVisible={modalVisible}>
+        <ContentModal>
+          <TextModal>Deseja cancelar a inscrição ?</TextModal>
+          <ContentButtonModal>
+            <ButtonModal
+              cancel
+              title="Não"
+              onPress={() => setModalVisible(false)}
+            />
+            <ButtonModal title="Sim" onPress={() => {}} />
+          </ContentButtonModal>
+        </ContentModal>
       </Modal>
     </Background>
   );
