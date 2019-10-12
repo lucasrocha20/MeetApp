@@ -66,15 +66,31 @@ export const ContentButtonModal = styled.View`
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
 `;
 
-export const ButtonModal = styled.Button.attrs(props => ({
-  color: props.cancel ? '#f94d6a' : '#6FCF97',
-  style: {
-    width: 200px,
-  },
-}))`
+export const ButtonModal = styled.TouchableOpacity`
+  background: ${props => (props.cancel ? '#f94d6a' : '#6FCF71')};
   margin-top: 30px;
   width: 45%;
+  height: 35px;
+  border-radius: 4px;
+  justify-content: center;
   align-items: center;
+`;
+
+export const TextButton = styled.Text`
+  font-size: 18px;
+  color: #fff;
+  font-weight: bold;
+`;
+
+export const ContainerEmptyList = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextEmpty = styled.Text`
+  color: #fff;
+  font-size: 20px;
 `;

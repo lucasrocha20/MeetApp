@@ -69,3 +69,13 @@ export const ButtonContent = styled(Button)`
 
   opacity: ${props => (props.past || props.subscription ? 0.6 : 1)};
 `;
+
+export const ContainerEmptyList = styled.View`
+  align-items: center;
+  justify-content: center;
+`;
+
+export const TextEmpty = styled.Text`
+  color: #fff;
+  font-size: 20px;
+`;

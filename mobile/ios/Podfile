@@ -31,6 +31,8 @@ target 'meetappMobile' do
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
+  pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
+
   target 'meetappMobileTests' do
     inherit! :search_paths
     # Pods for testing

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import Modal from 'react-native-modal';
 import { withNavigationFocus } from 'react-navigation';
 import PropTypes from 'prop-types';
@@ -23,6 +23,9 @@ import {
   TextModal,
   ContentButtonModal,
   ButtonModal,
+  TextButton,
+  ContainerEmptyList,
+  TextEmpty,
 } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
@@ -32,6 +35,7 @@ import api from '~/services/api';
 function Inscription({ isFocused }) {
   const [subscriptions, setSubscriptions] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+  const [itemSelected, setItemSelected] = useState();
 
   async function loadSubscriptions() {
     try {
@@ -58,15 +62,25 @@ function Inscription({ isFocused }) {
     }
   }
 
-  async function cancelSubscription(id) {
+  async function cancelSubscription() {
     try {
-      await api.delete(`subscription/${id}`);
+      await api.delete(`subscription/${itemSelected}`);
       loadSubscriptions();
 
+      setModalVisible(false);
+      setItemSelected();
       Alert.alert('Sucesso!', 'Inscrição cancelada com sucesso!');
     } catch (err) {
       Alert.alert('Erro!', 'Não foi possível cancelar essa inscrição!');
     }
+  }
+
+  function emptyList() {
+    return (
+      <ContainerEmptyList>
+        <TextEmpty>Você não possui inscrições</TextEmpty>
+      </ContainerEmptyList>
+    );
   }
 
   useEffect(() => {
@@ -82,6 +96,7 @@ function Inscription({ isFocused }) {
         <ListMeetup
           data={subscriptions}
           keyExtractor={item => String(item.id)}
+          ListEmptyComponent={() => emptyList()}
           renderItem={({ item }) => (
             <Content>
               <Image
@@ -109,25 +124,34 @@ function Inscription({ isFocused }) {
               </Info>
 
               {/* cancelSubscription(item.id) */}
-              <ButtonContent onPress={() => setModalVisible(true)}>
+              <ButtonContent
+                onPress={() => {
+                  setItemSelected(item.id);
+                  setModalVisible(true);
+                }}
+              >
                 Cancelar Inscrição
               </ButtonContent>
             </Content>
           )}
         />
       </Container>
-      {console.tron.log(modalVisible)}
 
       <Modal isVisible={modalVisible}>
         <ContentModal>
           <TextModal>Deseja cancelar a inscrição ?</TextModal>
           <ContentButtonModal>
+            <ButtonModal cancel onPress={() => setModalVisible(false)}>
+              <TextButton>Não</TextButton>
+            </ButtonModal>
             <ButtonModal
-              cancel
-              title="Não"
-              onPress={() => setModalVisible(false)}
-            />
-            <ButtonModal title="Sim" onPress={() => {}} />
+              title="Sim"
+              onPress={() => {
+                cancelSubscription();
+              }}
+            >
+              <TextButton>Sim</TextButton>
+            </ButtonModal>
           </ContentButtonModal>
         </ContentModal>
       </Modal>

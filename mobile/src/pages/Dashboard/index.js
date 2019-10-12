@@ -20,6 +20,8 @@ import {
   Span,
   TextSpan,
   ButtonContent,
+  ContainerEmptyList,
+  TextEmpty,
 } from './styles';
 import Background from '~/components/Background';
 import Header from '~/components/Header';
@@ -57,8 +59,6 @@ function Dashboard({ isFocused }) {
 
     setMeetups([...meetups, ...data]);
     setPage(page + 1);
-
-    console.tron.log(data);
   }
 
   const ActualDate = useMemo(
@@ -108,10 +108,17 @@ function Dashboard({ isFocused }) {
     }
   }
 
+  function emptyList() {
+    return (
+      <ContainerEmptyList>
+        <TextEmpty>A lista não possui Nenhum item para exibir</TextEmpty>
+      </ContainerEmptyList>
+    );
+  }
+
   return (
     <Background>
       <Header />
-      {console.tron.log(subscriptions, 'subs')}
       <Container>
         <DateHeader>
           <TouchableOpacity onPress={handleSubDay}>
@@ -130,6 +137,7 @@ function Dashboard({ isFocused }) {
           keyExtractor={item => String(item.id)}
           onEndReached={loadlMeetups}
           onEndReachedThreshold={0.2}
+          ListEmptyComponent={() => emptyList()}
           renderItem={({ item }) => (
             <Content>
               <Image
@@ -155,7 +163,6 @@ function Dashboard({ isFocused }) {
                 </Span>
               </Info>
 
-              {console.tron.log(subscriptions.indexOf(item.id))}
               {subscriptions.indexOf(item.id) >= 0 ? (
                 <ButtonContent
                   subscription
