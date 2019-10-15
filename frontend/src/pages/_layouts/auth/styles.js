@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #22202c;
+  background: linear-gradient(-180deg, #22202c, #402845);
 `;
 
 export const Content = styled.div`
