@@ -1,6 +1,8 @@
-# MeetApp
+<h3 align="center">MeetApp</h3>
 
-![Group 1 (2)](https://user-images.githubusercontent.com/34634532/90909887-d8d5ed00-e3ac-11ea-93ae-534c6a4a3ef1.png)
+<p align="center">
+  <img src="https://github.com/lucasrocha20/MeetApp/blob/master/imagens/icone.png" alt="logo"/>
+</p>
 
 ## Tabela de Conteúdo
 
